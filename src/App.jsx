@@ -2,76 +2,51 @@ import { useState,useEffect } from 'react'
 import {FaCheck} from 'react-icons/fa'
 import {AiFillDelete} from 'react-icons/ai'
 import './App.css'
+import axios from 'axios'
 
 function App() {
   const [tasks, setTasks] = useState([])
   const [task,setTask] = useState("")
-  
+
   useEffect(() => {
     fetchTasks()
   }, [])
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('https://todo-backend-1-7fe4.onrender.com/tasks')
-      const data = await response.json()
-      setTasks(data)
-      console.log(data)
+      const response = await axios.get('https://todo-backend-1-7fe4.onrender.com/tasks')
+      console.log(response)
+      setTasks(response.data)
     } catch (error) {
-      alert("Error Occured While Fetching the tasks: ",error)
+      alert("Error fetching Data: ",error)
     }
   }
 
   const AddTasks = async () => {
-    if(!task.trim()) {
-      alert("Task cannot be empty!!!")
-      return
-    }
-    try {
-      const response = await fetch('https://todo-backend-1-7fe4.onrender.com/tasks',{
-        method: 'POST',
-        headers : {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({task:task})
-      })
-      if(response.ok) {
-        setTask('')
+      try {
+        const response = await axios.post('https://todo-backend-1-7fe4.onrender.com/tasks',{task:task})
         fetchTasks()
+        setTask("")
+      } catch (error) {
+        alert("Error Adding Data to Database: ",error)
       }
-    } catch (error) {
-      alert("Error Occured While Adding new Task: ",error)
-    }
   }
 
-  const ChangeStatus = async (id,status) => {
+  const ChangeStatus = async (id) => {
     try {
-      const response = await fetch(`https://todo-backend-1-7fe4.onrender.com/tasks/${id}`,{
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({status: !status})
-      })
-      console.log(response)
-      if(response.ok) {
-        fetchTasks()
-      }
+      await axios.patch(`https://todo-backend-1-7fe4.onrender.com/tasks/${id}`)
+      fetchTasks()
     } catch (error) {
-      alert("Error While Updating Task Status: ",error)
+      alert("Error Changing the Status of the Task: ",error)
     }
   }
 
   const DeleteTask = async (id) => {
     try {
-      const response = await fetch(`https://todo-backend-1-7fe4.onrender.com/tasks/${id}`,{
-        method: 'DELETE'
-      })
-      if(response.ok) {
-        fetchTasks()
-      }
+      await axios.delete(`https://todo-backend-1-7fe4.onrender.com/tasks/${id}`)
+      fetchTasks()
     } catch (error) {
-      alert("Failedto delete Task: ",error)
+      alert("Error Deleting Task: ",task)
     }
   }
 
