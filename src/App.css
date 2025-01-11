@@ -1,0 +1,124 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.show {
+  background-color: white;
+  color: black;
+}
+li {
+  color: black;
+}
+
+.addTask {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.show {
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  backdrop-filter: blur(40px);
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.tasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: 5px;
+  transition: all 0.5s ease;
+}
+
+.tasks:hover {
+  border: 1px solid antiquewhite;
+}
+
+h1,p,h3 {
+  color: white;
+}
+
+.add {
+  background-color: green;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+.add:hover {
+  background-color: yellow;
+  color: blue;
+  box-shadow: 0 0 40px rgba(86, 214, 1, 0.8), 0 0 50px rgba(255, 230, 0, 1), 0 0 100px rgba(255, 255, 255, 1);
+}
+
+.delete {
+  background-color: red;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.loader {
+  border: 3px solid transparent;
+  border-top: 3px solid gray;
+  border-right: 3px solid white;
+  border-left: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
