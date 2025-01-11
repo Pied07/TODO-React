@@ -15,7 +15,6 @@ function App() {
   const fetchTasks = async () => {
     try {
       const response = await axios.get('https://todo-backend-1-7fe4.onrender.com/tasks')
-      console.log(response)
       setTasks(response.data)
     } catch (error) {
       alert("Error fetching Data: ",error)
@@ -23,12 +22,16 @@ function App() {
   }
 
   const AddTasks = async () => {
-      try {
-        const response = await axios.post('https://todo-backend-1-7fe4.onrender.com/tasks',{task:task})
-        fetchTasks()
-        setTask("")
-      } catch (error) {
-        alert("Error Adding Data to Database: ",error)
+      if (task.trim()) {
+        try {
+          const response = await axios.post('https://todo-backend-1-7fe4.onrender.com/tasks',{task:task})
+          fetchTasks()
+          setTask("")
+        } catch (error) {
+          alert("Error Adding Data to Database: ",error)
+        }
+      } else {
+        alert("Task cannot be empty!!!")
       }
   }
 
@@ -54,7 +57,7 @@ function App() {
     <>
       <h1>Todo Application</h1> <hr /><br /><br />
         <div className="addTask">
-          <input type="text" placeholder='Enter Task Name' value={task} onChange={(e) => setTask(e.target.value)} required/>
+          <input type="text" placeholder='Enter Task Name' value={task} onChange={(e) => setTask(e.target.value)}/>
           <button className='add' onClick={AddTasks}>Add</button>
         </div>
         <h3>Task Lists:</h3> <hr />
