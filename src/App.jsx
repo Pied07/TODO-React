@@ -54,7 +54,7 @@ function App() {
     <>
       <h1>Todo Application</h1> <hr /><br /><br />
         <div className="addTask">
-          <input type="text" placeholder='Enter Task Name' value={task} onChange={(e) => setTask(e.target.value)} />
+          <input type="text" placeholder='Enter Task Name' value={task} onChange={(e) => setTask(e.target.value)} required/>
           <button className='add' onClick={AddTasks}>Add</button>
         </div>
         <h3>Task Lists:</h3> <hr />
